@@ -1,0 +1,25 @@
+{
+  "name": "allhands-server",
+  "version": "0.0.1",
+  "description": "Running a server for the allhands OSC network",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelpalumbo/allhands-server.git"
+  },
+  "author": "Michael Palumbo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michaelpalumbo/allhands-server/issues"
+  },
+  "homepage": "https://github.com/michaelpalumbo/allhands-server#readme",
+  "dependencies": {
+    "heartbeats": "^5.0.1",
+    "ws": "^7.4.6",
+    "yargs": "^17.0.1"
+  }
+}
