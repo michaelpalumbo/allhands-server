@@ -16,7 +16,7 @@ In this self-hosted version of allhands, one person in your group will be runnin
 
 ## How To:
 
-- Only one person in your group should run the server at a given time. If you are NOT the one running the server, use one of several available [allhands apps](https://www.npmjs.com/package/allhands)
+- Only one person in your group should run the server at a given time. If you are NOT the one running the server, use the node module: (https://www.npmjs.com/package/allhands)
 
 - The server is run separately from allhands. If you are running the server, you'll still need to run allhands in order to send-receive data. 
 
@@ -50,4 +50,4 @@ allhands
 
 ## Usage
 
-allhands is meant to work alongside other programs that can send/receive OSC data. Once you have the allhands app running and connected to the server, you should open your preferred program and try sending/receiving data. Example code for puredata and max/msp can be found at https://github.com/michaelpalumbo/allhands
+allhands is meant to work alongside other programs that can send/receive OSC data. Once you have the allhands app running and connected to the server, you should open your preferred program and try sending/receiving data. Example code for puredata, max/msp, etc, can be found at https://github.com/michaelpalumbo/allhands-examples

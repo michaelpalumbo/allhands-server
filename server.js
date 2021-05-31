@@ -7,14 +7,22 @@ var heart = heartbeats.createHeart(1000);
 let pings = {
 }
 
+// keep track of nodes and network data
+let network = {
+    global: {
+        participantCount: 0
+    },
+    participants:{}
+}
+
 const WebSocket = require('ws');
 
 //! For the heroku version, need to set the https and port together (grab it from earlier versions)
 const wss = new WebSocket.Server({ port: 8081 });
 
 wss.on('connection', function connection(ws, req, client) {
-    let thisName
-    
+    network.global.participantCount++
+    let name
     console.log('new connection established ')
 
     // start the ping/pong for calculating round-trip timing
@@ -40,15 +48,22 @@ wss.on('connection', function connection(ws, req, client) {
 
         switch (msg.cmd){
             // gather returning 'pong' time
-            case 'thisMachine':
-                thisName = name
+            case 'thisNode':
+                
+                name = msg.data.name
+                
+                network.participants[name] = msg.data
+                delete msg.data.name
+                
 
             break
             case 'pong':
                 let pongTime = Date.now() - msg.data
-                pings[msg.name] = pongTime
-
-                // names[name] = {ping: pongTime}
+                if(name){
+                    network.participants[name]['ping'] = pongTime
+                }
+                
+                
 
             break
             case 'introduce':
@@ -83,4 +98,11 @@ function broadcast(msg){
     });
 }
 
-
+// send out network state every second
+heart.createEvent(1, function(count, last){
+    let networkMsg = JSON.stringify({
+        'cmd': 'network',
+        'data': network
+    })
+    broadcast(networkMsg)
+});
