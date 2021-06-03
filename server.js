@@ -33,6 +33,12 @@ wss.on('connection', function connection(ws, req, client) {
             data: Date.now()
         })
         ws.send(pingMsg)
+
+        let networkMsg = JSON.stringify({
+            'cmd': 'network',
+            'data': network
+        })
+        broadcast(networkMsg)
         
         // let namesMsg = JSON.stringify({
         //     cmd: 'whosConnected',
@@ -58,10 +64,11 @@ wss.on('connection', function connection(ws, req, client) {
 
             break
             case 'pong':
-                let pongTime = Date.now() - msg.data
+                let pongTime = Date.now() - msg.date
                 if(name){
                     network.participants[name]['ping'] = pongTime
                 }
+                console.log(pongTime)
                 
                 
 
@@ -72,7 +79,7 @@ wss.on('connection', function connection(ws, req, client) {
             // in case you want to receive other data and route it elsewhere
             case 'OSC':
                 // now using a broadcast server
-                console.log('received data:\n', msg)
+                //console.log('received data:\n', msg)
                 broadcast(JSON.stringify(msg))
                 
             break;
@@ -86,7 +93,7 @@ wss.on('connection', function connection(ws, req, client) {
     });
 
     ws.on('close', function(code, reason) {
-
+        delete network.participants[name]
     })
 });
 // we can use this if we want to send to multiple clients!
@@ -98,11 +105,11 @@ function broadcast(msg){
     });
 }
 
-// send out network state every second
-heart.createEvent(1, function(count, last){
-    let networkMsg = JSON.stringify({
-        'cmd': 'network',
-        'data': network
-    })
-    broadcast(networkMsg)
-});
+// // send out network state every second
+// heart.createEvent(1, function(count, last){
+//     let networkMsg = JSON.stringify({
+//         'cmd': 'network',
+//         'data': network
+//     })
+//     broadcast(networkMsg)
+// });
