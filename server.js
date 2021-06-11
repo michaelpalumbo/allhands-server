@@ -49,7 +49,12 @@ wss.on('connection', function connection(ws, req, client) {
                 pings[msg.name] = pongTime
 
                 // names[name] = {ping: pongTime}
-
+                let pong = JSON.stringify({
+                    cmd: 'pong',
+                    name: msg.name,
+                    time: pongTime
+                })
+                broadcast(pong)
             break
             case 'introduce':
                 console.log(msg.data, 'connected to the server')
