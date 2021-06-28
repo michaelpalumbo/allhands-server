@@ -1,11 +1,14 @@
 {
   "name": "allhands-server",
   "version": "0.0.1",
-  "description": "Running a server for the allhands OSC network",
+  "description": "Running a server for the allhands controller data network",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
+  },
+  "engines": {
+    "node": "12.17.x"
   },
   "repository": {
     "type": "git",
@@ -18,7 +21,12 @@
   },
   "homepage": "https://github.com/michaelpalumbo/allhands-server#readme",
   "dependencies": {
+    "bufferutil": "^4.0.3",
+    "express": "^4.17.1",
     "heartbeats": "^5.0.1",
+    "object-hash": "^2.2.0",
+    "satelize": "^0.2.0",
+    "utf-8-validate": "^5.0.5",
     "ws": "^7.4.6",
     "yargs": "^17.0.1"
   }

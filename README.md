@@ -1,3 +1,5 @@
+**note: this readme is outdated, needs to be reqritten for heroku-hosted allhands servers... stay tuned... or open a new issue on the gihtub and tag @michaelpalumbo**
+
 # allhands-server
 In this self-hosted version of allhands, one person in your group will be running the server node on their own machine, and the rest of the group collaborators will need to connect to that server. This page provides installation and usage instructions, as well as how to configure a router to allow this to work. 
 
